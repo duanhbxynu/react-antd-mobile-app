@@ -13,6 +13,7 @@
     "css-loader": "^6.7.2",
     "customize-cra": "^1.0.0",
     "http-proxy-middleware": "^2.0.6",
+    "js-cookie": "^3.0.1",
     "less": "^3.13.1",
     "less-loader": "^7.3.0",
     "lib-flexible": "^0.3.2",

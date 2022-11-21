@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { Navigate } from "react-router-dom"
 import { NavBar, Input, Button, Toast } from 'antd-mobile'
 import { reqVerifyCode, reqLogin } from '../../api'
+import { phoneReg, verifyCodeReg } from '../../utils/reg'
+import { setCookie } from '../../utils/cookie'
 import github from '../../assets/github.png'
 import weixin from '../../assets/weixin.png'
 import qq from '../../assets/qq.png'
-import { phoneReg, verifyCodeReg } from '../../utils/reg'
+
 import './login.less'
 
 export default class Login extends Component {
@@ -13,7 +15,8 @@ export default class Login extends Component {
     phone: '',
     verifyCode: '',
     time: 60,
-    canClick: true
+    canClick: true,
+    loginSuccess: false
   }
   // 保存数据
   saveData = (type) => {
@@ -26,9 +29,6 @@ export default class Login extends Component {
   }
   // 获取验证码的回调
   getVerifyCode = async () => {
-    console.log(this.props, 'props')
-    // const navigate = useNavigate()
-    // navigate('/usercenter')
     const { phone, canClick } = this.state
     if (!canClick) return
     if (!phone) return Toast.show({ icon: 'fail', content: '手机号格式不合法！' })
@@ -58,21 +58,36 @@ export default class Login extends Component {
     if (!(phone && verifyCode)) {
       return Toast.show({ icon: 'fail', content: '请检查手机号和验证码格式' })
     }
-    // const navigate = useNavigate()
-    // navigate('/usercenter')
-    // this.props.history.push('/usercenter')
+
+
+    this.setState({ loginSuccess: true }) // 模拟跳转，提前跳
+    let userInfoObj = {
+      token: 'tokenValue.xxxxxxxxxxx',
+      avatar: 'https://images.unsplash.com/photo-1548532928-b34e3be62fc6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
+      name: 'Novalee Spicer',
+      nickName: '二狗子',
+      mobile: phone
+    }
+    setCookie('userInfo', JSON.stringify(userInfoObj))
+
+
     const result = await reqLogin(phone, verifyCode)
     const { code, message } = result
     if (code === 20000) {
       Toast.show({ icon: 'success', content: '登录成功' })
-      // navigate('/usercenter')
+      // 登录成功后跳转到个人中心页
+      this.setState({ loginSuccess: true })
+      // 设置当前用户token
+      setCookie('userInfo', JSON.stringify(userInfoObj))
     } else {
       Toast.show({ icon: 'fail', content: message })
     }
   }
-
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
   render() {
-    const { time, canClick, phone, verifyCode } = this.state
+    const { time, canClick, phone, verifyCode, loginSuccess } = this.state
     return (
       <div>
         <NavBar mode='light'>手机验证码登录</NavBar>
@@ -84,9 +99,9 @@ export default class Login extends Component {
             {canClick ? '' : `(${time}s)`}
           </button>
         </div>
-        <Button color='primary' block size='middle' onClick={this.login}
-          disabled={(phone && verifyCode) ? false : true}
-        >登录</Button>
+        <Button color='primary' block size='middle' onClick={this.login} disabled={(phone && verifyCode) ? false : true}>
+          登录{loginSuccess && (<Navigate to="/usercenter" replace={true} />)}
+        </Button>
         <footer className='footer'>
           <fieldset className='other' align="center">
             <legend className='legend'>其他登录方式</legend>

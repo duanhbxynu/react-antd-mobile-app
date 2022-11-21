@@ -6,3 +6,9 @@ export const reqVerifyCode = (phone) => request.post('/login/digits', { phone })
 
 // 请求登录
 export const reqLogin = (phone, code) => request.post('/login/phone', { phone, code })
+
+// 请求校验用户身份
+export const reqVerifyToken = () => request.post('/login/verify')
+
+// 退出登录
+export const reqLogout = (token) => request.post('/logout', { token })
