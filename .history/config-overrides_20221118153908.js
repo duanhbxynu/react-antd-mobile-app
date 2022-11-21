@@ -1,0 +1,15 @@
+const { override, fixBabelImports, addLessLoader, addPostcssPlugins } = require('customize-cra')
+module.exports = override(
+  fixBabelImports('import', {
+    libraryName: 'antd-mobile',
+    libraryDirectory: 'es', // 样式模块作为es6模块处理
+    style: 'css' // 处理源文件样式
+  }),
+  addLessLoader({
+
+    lessOptions: {
+
+    }
+  }),
+  addPostcssPlugins([require('postcss-px2rem')({ remUnit: 37.5 })])
+)
