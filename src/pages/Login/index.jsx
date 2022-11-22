@@ -83,6 +83,11 @@ export default class Login extends Component {
       Toast.show({ icon: 'fail', content: message })
     }
   }
+  loginGithub = () => {
+    // 第三方登录授权
+    window.location.href = 'https://github.com/login/oauth/authorize?client_id=8e6d0c4d08619032deea'
+  }
+
   componentWillUnmount() {
     clearInterval(this.timer)
   }
@@ -107,7 +112,7 @@ export default class Login extends Component {
             <legend className='legend'>其他登录方式</legend>
           </fieldset>
           <div className='img'>
-            <img src={github} alt="" />
+            <img onClick={this.loginGithub} src={github} alt="" />
             <img src={weixin} alt="" />
             <img src={qq} alt="" />
           </div>
