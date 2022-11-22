@@ -1,13 +1,18 @@
 import Login from '../pages/Login'
 import UserCenter from '../pages/UserCenter'
+import ProductCenter from '../pages/product'
 const routes = [
   {
     path: '/login',
-    component: <Login/>
+    component: <Login />
   },
   {
     path: '/usercenter',
-    component: <UserCenter/>
+    component: <UserCenter />
+  },
+  {
+    path: '/productCenter',
+    component: <ProductCenter />
   }
 ]
 export default routes

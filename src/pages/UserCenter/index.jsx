@@ -1,25 +1,28 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { getCookie, removeCookie } from '../../utils/cookie'
 import { reqVerifyToken, reqLogout } from '../../api'
 import { useNavigate } from 'react-router-dom'
-import { NavBar, Avatar, Button } from 'antd-mobile'
+import { NavBar, Avatar, Button, Toast } from 'antd-mobile'
+import { RightOutline } from 'antd-mobile-icons'
 import './userCenter.less'
 
 export default function UserCenter() {
   const navigate = useNavigate()
-  const userInfo = JSON.parse(getCookie('userInfo')) || ''
+  const userInfo = getCookie('userInfo') ? JSON.parse(getCookie('userInfo')) : ''
   useEffect(async () => {
     console.log('此处是componentDidMount钩子函数')
-    const result = reqVerifyToken() // 校验token的接口
     const token = userInfo.token
-    if (userInfo && token) {
+    if (token) {
       // token有值且校验通过
-      console.log(result)
     } else {
       // 校验失败跳转登录页
-      navigate('/login')
+      Toast.show({ icon: 'fail', content: '登录信息失效，请重新登录' })
+      setTimeout(() => {
+        navigate('/login')
+      }, 1000)
     }
-
+    const result = await reqVerifyToken() // 校验token的接口
+    console.log(result)
     return () => {
       console.log('此处是componentWillUnmount钩子函数')
     }
@@ -29,6 +32,10 @@ export default function UserCenter() {
     navigate('/login')
     removeCookie('userInfo')
     await reqLogout(userInfo.token)
+  }
+  const toProductCenter = () => {
+    // 路由传值
+    navigate('/productCenter', { state: { 'user': userInfo.nickName, 'mobile': userInfo.mobile } })
   }
 
   return (
@@ -44,8 +51,15 @@ export default function UserCenter() {
         <div className='info'>
           <span>手机</span><span>{userInfo.mobile}</span>
         </div>
+        {
+          userInfo ? (
+            <div className='info' onClick={toProductCenter}>
+              <span>产品中心</span><span><RightOutline /></span>
+            </div>
+          ) : null
+        }
+        <Button color='primary' block size='middle' onClick={logout}>退出登录</Button>
       </div>
-      <Button color='primary' block size='middle' onClick={logout}>退出登录</Button>
     </div>
   )
 }

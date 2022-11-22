@@ -7,7 +7,6 @@ import { setCookie } from '../../utils/cookie'
 import github from '../../assets/github.png'
 import weixin from '../../assets/weixin.png'
 import qq from '../../assets/qq.png'
-
 import './login.less'
 
 export default class Login extends Component {
@@ -96,28 +95,31 @@ export default class Login extends Component {
     return (
       <div>
         <NavBar mode='light'>手机验证码登录</NavBar>
-        <Input placeholder='请输入手机号' clearable onChange={this.saveData('phone')} />
-        <div className='verify-input'>
-          <Input placeholder='请输入验证码' clearable onChange={this.saveData('verifyCode')} />
-          <button className='verify-btn' style={{ 'color': canClick ? 'red' : 'grey' }} onTouchStart={this.getVerifyCode}>
-            获取验证码
-            {canClick ? '' : `(${time}s)`}
-          </button>
-        </div>
-        <Button color='primary' block size='middle' onClick={this.login} disabled={(phone && verifyCode) ? false : true}>
-          登录{loginSuccess && (<Navigate to="/usercenter" replace={true} />)}
-        </Button>
-        <footer className='footer'>
-          <fieldset className='other' align="center">
-            <legend className='legend'>其他登录方式</legend>
-          </fieldset>
-          <div className='img'>
-            <img onClick={this.loginGithub} src={github} alt="" />
-            <img src={weixin} alt="" />
-            <img src={qq} alt="" />
+        <div className='loginPage'>
+          <Input placeholder='请输入手机号' clearable onChange={this.saveData('phone')} />
+          <div className='verify-input'>
+            <Input placeholder='请输入验证码' clearable onChange={this.saveData('verifyCode')} />
+            <button className='verify-btn' style={{ 'color': canClick ? 'red' : 'grey' }} onTouchStart={this.getVerifyCode}>
+              获取验证码
+              {canClick ? '' : `(${time}s)`}
+            </button>
           </div>
-          <div className='tip'>未注册的手机号，验证后会自动创建硅谷账号，登录即代表您同意：<a href="http://atguigu.com">《硅谷隐私政策》</a></div>
-        </footer>
+          <Button color='primary' block size='middle' onClick={this.login} disabled={(phone && verifyCode) ? false : true}>
+            登录{loginSuccess && (<Navigate to="/usercenter" replace={true} />)}
+          </Button>
+          <footer className='footer'>
+            <fieldset className='other' align="center">
+              <legend className='legend'>其他登录方式</legend>
+            </fieldset>
+            <div className='img'>
+              <img onClick={this.loginGithub} src={github} alt="" />
+              <img src={weixin} alt="" />
+              <img src={qq} alt="" />
+            </div>
+            <div className='tip'>未注册的手机号，验证后会自动创建硅谷账号，登录即代表您同意：<a href="http://atguigu.com">《硅谷隐私政策》</a></div>
+          </footer>
+        </div>
+
       </div>
     )
   }

@@ -7,7 +7,6 @@ import App from './App'
 import './utils/rem'
 
 const container = document.getElementById('root')
-// const root = ReactDOM.createRoot(container)
 render(
   <BrowserRouter>
     <App />
