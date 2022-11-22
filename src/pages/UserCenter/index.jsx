@@ -11,6 +11,8 @@ export default function UserCenter() {
   const userInfo = getCookie('userInfo') ? JSON.parse(getCookie('userInfo')) : ''
   useEffect(async () => {
     console.log('此处是componentDidMount钩子函数')
+    const result = await reqVerifyToken() // 校验token的接口
+    console.log(result)
     const token = userInfo.token
     if (token) {
       // token有值且校验通过
@@ -21,12 +23,11 @@ export default function UserCenter() {
         navigate('/login')
       }, 1000)
     }
-    const result = await reqVerifyToken() // 校验token的接口
-    console.log(result)
+
     return () => {
       console.log('此处是componentWillUnmount钩子函数')
     }
-  })
+  }, [])
 
   const logout = async () => {
     navigate('/login')
