@@ -4,15 +4,26 @@ import { Toast } from 'antd-mobile'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
+const service = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+  timeout: 800000
+})
 // 请求拦截器
-axios.interceptors.request.use(config => {
+service.interceptors.request.use(config => {
+  // 添加header参数，如token等参数到请求头
   NProgress.start()
   return config
+}, error => {
+  if ((error + '').startsWith('Error: timeout of')) {
+    // 失败后可以跳转回登录页
+  }
+  Promise.reject(error)
 })
 
 // 响应拦截器
-axios.interceptors.response.use(
+service.interceptors.response.use(
   response => {
+    // 根据返回参数状态，进行拦截或返回结果
     NProgress.done()
     return response.data
   },
@@ -23,4 +34,4 @@ axios.interceptors.response.use(
   }
 )
 
-export default axios
+export default service

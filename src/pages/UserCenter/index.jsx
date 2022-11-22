@@ -9,10 +9,11 @@ import './userCenter.less'
 export default function UserCenter() {
   const navigate = useNavigate()
   const userInfo = getCookie('userInfo') ? JSON.parse(getCookie('userInfo')) : ''
-  useEffect(async () => {
+  useEffect(() => {
     console.log('此处是componentDidMount钩子函数')
-    const result = await reqVerifyToken() // 校验token的接口
-    console.log(result)
+    reqVerifyToken().then(res => {
+      console.log(res)
+    }) // 校验token的接口
     const token = userInfo.token
     if (token) {
       // token有值且校验通过
@@ -27,7 +28,7 @@ export default function UserCenter() {
     return () => {
       console.log('此处是componentWillUnmount钩子函数')
     }
-  }, [])
+  })
 
   const logout = async () => {
     navigate('/login')

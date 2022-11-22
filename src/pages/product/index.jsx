@@ -6,7 +6,8 @@ export default function Product() {
   const location = useLocation()
   useEffect(() => {
     console.log(location.state)  // {user: '二狗子', mobile: '17899990987'}
-  }, [])
+    console.log(process.env)
+  })
   return (
     <div>Product</div>
   )

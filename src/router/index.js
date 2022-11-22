@@ -3,6 +3,10 @@ import UserCenter from '../pages/UserCenter'
 import ProductCenter from '../pages/product'
 const routes = [
   {
+    path: '/',
+    component: <Login />
+  },
+  {
     path: '/login',
     component: <Login />
   },
