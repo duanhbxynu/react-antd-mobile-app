@@ -3,7 +3,12 @@ const path = require('path')
 const rewirePostcss = require('react-app-rewire-postcss')
 const px2rem = require('postcss-px2rem')
 
+// 修改打包后的文件名路径
+const paths = require('react-scripts/config/paths')
+paths.appBuild = path.join(path.dirname(paths.appBuild), './dist')
+
 module.exports = override(
+  // 按需加载antd-mobile组件
   fixBabelImports('import', {
     libraryName: 'antd-mobile',
     libraryDirectory: 'es/components',
@@ -19,6 +24,7 @@ module.exports = override(
     '@': path.resolve(__dirname, './src')
   }),
   addDecoratorsLegacy(),
+  // 移动端rem适配
   (config, env) => {
     rewirePostcss(config, {
       plugins: () => [
