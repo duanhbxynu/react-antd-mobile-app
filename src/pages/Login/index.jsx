@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Navigate } from "react-router-dom"
 import { NavBar, Input, Button, Toast } from 'antd-mobile'
-import { reqVerifyCode, reqLogin } from '../../api'
-import { phoneReg, verifyCodeReg } from '../../utils/reg'
-import { setCookie } from '../../utils/cookie'
-import github from '../../assets/github.png'
-import weixin from '../../assets/weixin.png'
-import qq from '../../assets/qq.png'
+import { reqVerifyCode, reqLogin } from '@/api'
+import { phoneReg, verifyCodeReg } from '@/utils/reg'
+import { setCookie } from '@/utils/cookie'
+import github from '@/assets/github.png'
+import weixin from '@/assets/weixin.png'
+import qq from '@/assets/qq.png'
 import './login.less'
 
 export default class Login extends Component {

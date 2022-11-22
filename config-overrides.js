@@ -16,7 +16,7 @@ module.exports = override(
     }
   }),
   addWebpackAlias({
-    '@': path.resolve('./src')
+    '@': path.resolve(__dirname, './src')
   }),
   addDecoratorsLegacy(),
   (config, env) => {

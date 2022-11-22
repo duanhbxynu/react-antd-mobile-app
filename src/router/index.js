@@ -1,6 +1,6 @@
-import Login from '../pages/Login'
-import UserCenter from '../pages/UserCenter'
-import ProductCenter from '../pages/product'
+import Login from '@/pages/Login'
+import UserCenter from '@/pages/UserCenter'
+import ProductCenter from '@/pages/product'
 const routes = [
   {
     path: '/',

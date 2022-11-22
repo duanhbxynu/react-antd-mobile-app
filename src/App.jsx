@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import appRoute from './router'
-import NotFound from './pages/NotFound'
+import appRoute from '@/router'
+import NotFound from '@/pages/NotFound'
 
 import './App.css'
 

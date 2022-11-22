@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { getCookie, removeCookie } from '../../utils/cookie'
-import { reqVerifyToken, reqLogout } from '../../api'
+import { getCookie, removeCookie } from '@/utils/cookie'
+import { reqVerifyToken, reqLogout } from '@/api'
 import { useNavigate } from 'react-router-dom'
 import { NavBar, Avatar, Button, Toast } from 'antd-mobile'
 import { RightOutline } from 'antd-mobile-icons'
