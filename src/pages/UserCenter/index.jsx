@@ -36,8 +36,14 @@ export default function UserCenter() {
     await reqLogout(userInfo.token)
   }
   const toProductCenter = () => {
-    // 路由传值
-    navigate('/productCenter', { state: { 'user': userInfo.nickName, 'mobile': userInfo.mobile } })
+    // 路由传值跳转
+    navigate('/productCenter', {
+      replace: false,
+      state: {
+        'user': userInfo.nickName,
+        'mobile': userInfo.mobile
+      }
+    })
   }
 
   return (
