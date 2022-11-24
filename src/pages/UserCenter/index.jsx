@@ -62,7 +62,7 @@ export default function UserCenter() {
         {
           userInfo ? (
             <div className='info' onClick={toProductCenter}>
-              <span>产品中心</span><span><RightOutline /></span>
+              <span>表单中心</span><span><RightOutline /></span>
             </div>
           ) : null
         }

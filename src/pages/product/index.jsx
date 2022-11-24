@@ -15,7 +15,7 @@ export default function Product() {
 
   // 获取路由中的参数
   const location = useLocation()
-  console.log(location.state)  // {user: '二狗子', mobile: '17899990987'}
+  // console.log(location.state)  // {user: '二狗子', mobile: '17899990987'}
 
   const addText = () => {
     setState(prevState => (
@@ -30,22 +30,43 @@ export default function Product() {
   }
 
   const inputRef = useRef()
-  const [val, setValue] = useState([])
+  const [valu, setValue] = useState({
+    detail: {
+      address: "我是地址",
+      amount: 5,
+      birthday: new Date('2022-11-30'),
+      delivery: true,
+      favoriteFruits: ['apple', 'banana'],
+      names: "张三",
+      slider: 70
+    },
+    val: []
+  })
   const addName = () => {
     // 获取input的值
     const inputValue = inputRef.current.nativeElement.value
     console.log(inputRef.current.nativeElement.value, 'inputValue')
+
     // 传值给子组件
-    inputValue && setValue(() => ([...val, inputValue]))
+    inputValue && setValue((prevData) => (
+      {
+        detail: {
+          ...prevData.detail,
+          address: inputValue
+        },
+        val: [...prevData.val, inputValue]
+      }
+    ))
+    console.log(valu, 'valu')
   }
   return (
     <div>
-      <Button color="primary" block onClick={addText}>按钮</Button>{state.message.text}
+      <Button color="primary" block onClick={addText}>按钮 {state.message.text}</Button>
       <div className="addName">
         <Input placeholder='请输入' ref={inputRef} clearable />
         <Button color="default" size="middle" onClick={addName}>添加</Button>
       </div>
-      <NameList nameList={val} />
+      <NameList nameList={valu.val} detail={valu.detail} />
     </div>
   )
 }
