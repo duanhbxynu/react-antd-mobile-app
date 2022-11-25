@@ -8,6 +8,8 @@ export default function List(props) {
   const save = (obj) => {
     console.log(obj, 'obj')
     Toast.show({ icon: 'success', content: '数据提交成功！' })
+    // 向父组件传值，send是父组件方法
+    props.send(obj)
   }
   useEffect(() => {
     console.log(details, 'details')

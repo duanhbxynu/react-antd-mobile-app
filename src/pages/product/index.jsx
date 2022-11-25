@@ -1,8 +1,10 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { Button, Input } from "antd-mobile"
 import NameList from './list'
+import List2 from "./list2"
 import './product.less'
+import dayjs from "dayjs"
 
 export default function Product() {
   const [state, setState] = useState({
@@ -57,8 +59,24 @@ export default function Product() {
         val: [...prevData.val, inputValue]
       }
     ))
-    console.log(valu, 'valu')
   }
+
+  // 接收子组件传过来的值
+  const [sendData, setSendData] = useState()
+  const getSendData = (data) => {
+    // 接收数据data后进行后续处理
+    console.log(data, 'data')
+    // 传值给兄弟组件List2
+    setSendData(() => ({
+      ...data,
+      birthday: dayjs(data.birthday).format('YYYY-MM-DD')
+    }))
+  }
+
+  useEffect(() => {
+    // console.log(valu, 'valu')
+  }, [valu])
+
   return (
     <div>
       <Button color="primary" block onClick={addText}>按钮 {state.message.text}</Button>
@@ -66,7 +84,10 @@ export default function Product() {
         <Input placeholder='请输入' ref={inputRef} clearable />
         <Button color="default" size="middle" onClick={addName}>添加</Button>
       </div>
-      <NameList nameList={valu.val} detail={valu.detail} />
+      {/* nameList，detail是向子组件传值，send是接收子组件传值的方法 */}
+      <NameList nameList={valu.val} detail={valu.detail} send={getSendData} />
+      {/* 兄弟组件NameList向List2传值，子-父-子 */}
+      <List2 sendData={sendData} />
     </div>
   )
 }
