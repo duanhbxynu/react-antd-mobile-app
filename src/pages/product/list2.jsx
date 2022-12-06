@@ -18,7 +18,10 @@ function List2(props) {
       <div>{props?.sendData?.birthday}</div>
       <div>{props?.sendData?.favoriteFruits}</div>
       <div>{props?.sendData?.slider}</div>
+      <hr />
+
       {/* 下面是react中使用mobx */}
+      <div>mobx的简单使用：</div>
       <Button color='primary' onClick={() => counterStore.addCount()}>{counterStore.count}</Button>
       <br />
       {/* 原数组 */}

@@ -31,7 +31,8 @@
     "react-dom": "^17.0.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "vconsole": "^3.15.0"
   },
   "scripts": {
     "start": "dotenv -e .env.dev react-app-rewired start",

@@ -5,6 +5,7 @@ import 'antd-mobile/es/global'
 import 'lib-flexible'
 import App from './App'
 import '@/utils/rem'
+import vConsole from '@/utils/vconsole'
 
 const container = document.getElementById('root')
 render(
