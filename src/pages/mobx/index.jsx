@@ -4,6 +4,8 @@ import { useEffect } from "react"
 // 导入方法
 import { useStore } from "../../mobxStore"
 
+import Task from './Task'
+
 function Mobx() {
   // 得到store
   const store = useStore()
@@ -24,6 +26,8 @@ function Mobx() {
           })
         }
       </div>
+      <hr />
+      <Task />
     </div>
   )
 }

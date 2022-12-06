@@ -5,11 +5,13 @@
 import React from "react"
 import counter from './counterStore'
 import channel from './channelStore'
+import task from './taskStore'
 
 class RootStore {
   constructor() {
     this.counterStore = counter
     this.channelStore = channel
+    this.taskStore = task
   }
 }
 
