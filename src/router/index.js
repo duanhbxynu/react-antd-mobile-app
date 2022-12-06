@@ -2,6 +2,7 @@ import Login from '@/pages/Login'
 import UserCenter from '@/pages/UserCenter'
 import ProductCenter from '@/pages/product'
 import Mobx from '@/pages/mobx'
+import Redux from '../pages/redux'
 const routes = [
   {
     path: '/',
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/mobx',
     component: <Mobx />
+  },
+  {
+    path: '/redux',
+    component: <Redux />
   }
 ]
 export default routes
