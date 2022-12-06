@@ -1,6 +1,7 @@
 import Login from '@/pages/Login'
 import UserCenter from '@/pages/UserCenter'
 import ProductCenter from '@/pages/product'
+import Mobx from '@/pages/mobx'
 const routes = [
   {
     path: '/',
@@ -17,6 +18,10 @@ const routes = [
   {
     path: '/productCenter',
     component: <ProductCenter />
+  },
+  {
+    path: '/mobx',
+    component: <Mobx />
   }
 ]
 export default routes

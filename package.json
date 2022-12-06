@@ -18,6 +18,8 @@
     "less": "^3.13.1",
     "less-loader": "^7.3.0",
     "lib-flexible": "^0.3.2",
+    "mobx": "^6.7.0",
+    "mobx-react-lite": "^3.4.0",
     "nprogress": "^0.2.0",
     "path": "^0.12.7",
     "postcss-flexbugs-fixes": "^4.2.1",

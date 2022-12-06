@@ -66,6 +66,9 @@ export default function UserCenter() {
             </div>
           ) : null
         }
+        <div className='info' onClick={() => navigate('/mobx')}>
+          <span>mobx使用</span><span><RightOutline /></span>
+        </div>
         <Button color='primary' block size='middle' onClick={logout}>退出登录</Button>
       </div>
     </div>

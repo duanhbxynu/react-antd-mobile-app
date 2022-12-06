@@ -12,3 +12,6 @@ export const reqVerifyToken = () => request.post('/login/verify')
 
 // 退出登录
 export const reqLogout = (token) => request.post('/logout', { token })
+
+// 获取列表
+export const reqChannels = () => request.get('http://geek.itheima.net/v1_0/channels')
